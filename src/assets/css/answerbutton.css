@@ -1,0 +1,21 @@
+.answer-button {
+    border: 1px solid red;
+    background-color: white;
+    color: red;
+    cursor: pointer;
+    padding: 1rem;
+    margin: 0.5rem;
+    min-width: 5rem;
+    font-size: 1.5rem;
+}
+
+.answer-button-selected {
+    border: 1px solid red;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    padding: 1rem;
+    margin: 0.5rem;
+    min-width: 5rem;
+    font-size: 1.5rem;
+}
