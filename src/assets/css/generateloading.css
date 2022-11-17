@@ -1,0 +1,14 @@
+.spinner{
+  width:4em;
+  height:4em;
+  background:blue;
+  border-radius:50%;
+  margin:5em auto;
+  border:.3em solid transparent;
+  animation:glow 1s ease infinite;
+}
+@keyframes glow {
+0% {box-shadow:0 0 0 .4em blue, 0 0 0 .1em blue; transform:rotate(-360deg);}
+50% {border-top-color:deepskyblue;}
+100% { box-shadow:0 0 0 .4em blue, 0 0 0 3.6em transparent;}
+}
