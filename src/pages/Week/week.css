@@ -1,0 +1,27 @@
+.template-day-card {
+    border: 1px solid #EEEEEE;
+    background-color: white;
+    color: white;
+    padding: 1rem 2rem;
+    min-width: 10rem;
+    cursor: pointer;
+}
+
+.template-day-card:hover {
+    background-color: #EEEEEE;
+    color: black;
+}
+
+.template-day-pill {
+    text-align: center;
+    border-radius: 1rem;
+    background-color: red;
+    color: white;
+    padding: 0.5rem 1rem;
+    max-width: 9rem;
+}
+
+.template-day-card-text {
+    color: black;
+    font-size: 1.5rem;
+}
