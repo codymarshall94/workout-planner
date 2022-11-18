@@ -32,7 +32,7 @@ function Onboarding() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        navigate("/template");
+        navigate("/week");
       }, 3000);
     }
   };
