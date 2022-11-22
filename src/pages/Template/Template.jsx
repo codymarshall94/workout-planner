@@ -1,17 +1,36 @@
 import React, { useState } from "react";
 import TemplateForm from "../../components/TemplateForm";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { saveWorkout } from "../../redux/reducers/workoutSlices";
 import "./template.css";
 
 function Template() {
   const [workout, setWorkout] = useState([]);
   const [workoutName, setWorkoutName] = useState("Leg Day");
   const [showForm, setShowForm] = useState(false);
+  const day = useSelector((state) => state.day.value);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const removeExercise = (index) => {
     const newWorkout = [...workout];
     newWorkout.splice(index, 1);
     setWorkout(newWorkout);
   };
+
+  const handleSaveWorkout = (workout) => {
+    const workoutToSave = {
+      day: day,
+      name: workoutName,
+      exercises: workout,
+    };
+
+    dispatch(saveWorkout(workoutToSave));
+    navigate("/week");
+  };
+
+  
 
   return (
     <div className="w-100">
@@ -44,6 +63,7 @@ function Template() {
           <div className="row d-flex align-items-center">
             {workout.map((exercise, index) => (
               <div
+                key={exercise.exerciseName}
                 className="col-12 workout-item-container border-bottom d-flex justify-content-evenly p-3"
                 id="workout-item-container"
               >
@@ -56,12 +76,12 @@ function Template() {
                 <span className="col-2 workout-item">{exercise.rest}</span>
                 <span className="col-1 workout-item">{exercise.rir}</span>
                 <div className="col-1">
-                <button
-                  className="btn btn-danger"
-                  onClick={() => removeExercise(exercise, index)}
-                >
-                  X
-                </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => removeExercise(exercise, index)}
+                  >
+                    X
+                  </button>
                 </div>
               </div>
             ))}
@@ -70,11 +90,20 @@ function Template() {
       ) : (
         <div>
           <h2>Add your first exercise</h2>
-          <button className="btn btn-primary" onClick={() => setShowForm(true)}>Add Exercise</button>
+          <button className="btn btn-primary" onClick={() => setShowForm(true)}>
+            Add Exercise
+          </button>
         </div>
       )}
-      {showForm && <TemplateForm setWorkout={setWorkout}/>}
-      {showForm && <button className="btn btn-success mt-5">Save Workout</button>}
+      {showForm && <TemplateForm setWorkout={setWorkout} />}
+      {showForm && (
+        <button
+          className="btn btn-success mt-5"
+          onClick={() => handleSaveWorkout(workout)}
+        >
+          Save Workout
+        </button>
+      )}
     </div>
   );
 }
