@@ -1,6 +1,8 @@
 import React from "react";
 import "./week.css";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { changeDay } from "../../redux/reducers/daySlice";
 
 const days = [
   "Monday",
@@ -12,8 +14,20 @@ const days = [
   "Sunday",
 ];
 
-function Template() {
+function Week() {
+  const workoutSaved = useSelector((state) => state.workout.value);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleDayClick = (day) => {
+    dispatch(changeDay(day));
+    if (workoutSaved.length > 0 || workoutSaved !== undefined) {
+      navigate("/workout");
+    } else {
+      navigate("/template");
+    }
+  };
+
   return (
     <div>
       <h1>Workout Plan Schedule</h1>
@@ -25,7 +39,11 @@ function Template() {
       <div className="container">
         <div className="row">
           {days.map((day) => (
-            <div onClick={() => navigate("/template")} className="col col-med-4 template-day-card">
+            <div
+              onClick={() => handleDayClick(day)}
+              key={day}
+              className="col col-med-4 template-day-card"
+            >
               <h5 className="template-day-pill">{day}</h5>
               <p className="template-day-card-text">Training</p>
             </div>
@@ -36,4 +54,4 @@ function Template() {
   );
 }
 
-export default Template;
+export default Week;
