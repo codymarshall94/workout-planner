@@ -48,7 +48,9 @@ function TemplateForm({ setWorkout }) {
         setFormDescription("Rest between sets in seconds");
         break;
       case "rir":
-        setFormDescription("Reps in reserve (RIR) is the number of reps you could have done after the last set"); 
+        setFormDescription(
+          "Reps in reserve (RIR) is the number of reps you could have done after the last set"
+        );
         break;
       default:
         setFormDescription("");
@@ -70,23 +72,18 @@ function TemplateForm({ setWorkout }) {
             placeholder="Exercise Name"
             required
           ></input>
-          <select
+          <input
             className="form-control"
+            type="number"
             value={sets}
             name="sets"
             onClick={handleFocus}
             onChange={(e) => setSets(e.target.value)}
             required
-          >
-            <option value="" disabled defaultValue>
-              Sets
-            </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
+            placeholder="Sets"
+            min="1"
+            max="10"
+          ></input>
           <select
             className="form-control"
             value={reps}
