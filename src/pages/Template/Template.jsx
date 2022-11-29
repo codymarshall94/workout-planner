@@ -1,8 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 import TemplateForm from "../../components/TemplateForm";
-import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { saveWorkout } from "../../redux/reducers/workoutSlices";
+import { useSelector } from "react-redux";
 import "./template.css";
 
 function Template() {
@@ -10,8 +9,6 @@ function Template() {
   const [workoutName, setWorkoutName] = useState("Leg Day");
   const [showForm, setShowForm] = useState(false);
   const day = useSelector((state) => state.day.value);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const removeExercise = (index) => {
     const newWorkout = [...workout];
@@ -21,16 +18,14 @@ function Template() {
 
   const handleSaveWorkout = (workout) => {
     const workoutToSave = {
-      day: day,
-      name: workoutName,
+      dayOfWeek: day,
       exercises: workout,
     };
 
-    dispatch(saveWorkout(workoutToSave));
-    navigate("/week");
+    axios
+      .post("http://localhost:4000/workout", workoutToSave)
+      .then((res) => console.log(res.data));
   };
-
-  
 
   return (
     <div className="w-100">
